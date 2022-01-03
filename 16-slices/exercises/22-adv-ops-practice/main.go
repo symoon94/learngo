@@ -31,7 +31,8 @@ func main() {
 	//
 	//
 	// ...
-	// s.Show("1st step", names)
+	names := make([]string, 5)
+	s.Show("1st step", names)
 
 	// ########################################################
 	//
@@ -45,7 +46,8 @@ func main() {
 	//
 	//
 	// ...
-	// s.Show("2nd step", names)
+	names = append(names, "einstein", "tesla", "aristotle")
+	s.Show("2nd step", names)
 
 	// ########################################################
 	//
@@ -65,7 +67,9 @@ func main() {
 	//
 	//
 	// ...
-	// s.Show("3rd step", names)
+	names = make([]string, 0, 5)
+	names = append(names, "einstein", "tesla", "aristotle")
+	s.Show("3rd step", names)
 
 	// ########################################################
 	//
@@ -79,11 +83,9 @@ func main() {
 	//
 	//
 	// Array (uncomment):
-	// moreNames := [...]string{"plato", "khayyam", "ptolemy"}
-	//
-	// ...
-	//
-	// s.Show("4th step", names)
+	moreNames := [...]string{"plato", "khayyam", "ptolemy"}
+	names = append(names, moreNames[:2]...)
+	s.Show("4th step", names)
 
 	// ########################################################
 	//
@@ -98,33 +100,36 @@ func main() {
 	//
 	//     Print the clone slice before and after the append.
 	//
+	clone := make([]string, 3, 5)
+	copy(clone, names[2:])
+	// ...
+	s.Show("5th step (before append)", clone)
 	//
 	// ...
-	// s.Show("5th step (before append)", clone)
-	//
-	// ...
-	// s.Show("5th step (after append)", clone)
+	clone = append(clone, names[:2]...)
+	s.Show("5th step (after append)", clone)
 
 	// ########################################################
 	//
 	// #6: Slice the `clone` slice between 2nd and 4th (inclusive)
 	//     elements into a new slice: `sliced`.
-	//
+	sliced := make([]string, 3)
+	copy(sliced, clone[1:4])
 	//     Append "hypatia" to the `sliced`.
-	//
 	//     Ensure that new backing array allocation "occurs".
+	sliced = append(sliced, "hypatia")
 	//
 	//       Change the 3rd element of the `clone` slice
 	//       to "elder".
-	//
 	//       Doing so should not change any elements of
 	//       the `sliced` slice.
+	clone[2] = "elder"
 	//
 	//     Print the `clone` and `sliced` slices.
 	//
 	//
 	// ...
-	// s.Show("6th step", clone, sliced)
+	s.Show("6th step", clone, sliced)
 }
 
 //
